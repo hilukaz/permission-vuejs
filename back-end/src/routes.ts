@@ -8,6 +8,8 @@ import { UserAccess } from "./controllers/UserAccess";
 import { can, is } from "./middlewares/permissions";
 import { PermissionsPrivate } from "./common/utils/permissions";
 import { RolesPrivate } from "./common/utils/roles";
+import {PerfilController} from "./controllers/PerfilController"
+// import {AuthController} from "./controllers/AuthController"
 
 const router=Router();
 
@@ -15,11 +17,15 @@ const userController=new UserController();
 const sessionController=new SessionController();
 const roleController=new RoleController();
 const userAccess =new UserAccess();
+const perfil= new PerfilController()
+// const auth= new AuthController()
 // const userRole=new UserRole();
 
 router.post("/user",userController.criar);
 router.post("/login",sessionController.login);
 router.get("/user", userController.consultar);
+router.get("/perfil", authMiddleware,perfil.view);
+router.get("/auth", authMiddleware);
 router.post("/acesso",authMiddleware,userAccess.criar)
 router.put("/user/:id",authMiddleware,is([RolesPrivate.admin]),userController.atualizar);
 // router.delete("/user/:id",userController.deletar);

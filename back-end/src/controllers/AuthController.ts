@@ -11,19 +11,15 @@ export const authMiddleware =async(request:Request,response: Response, next: Nex
     }
 
     const{authorization}=request.headers
-    const{retornar}=request.headers
-    // console.log('123')
-    // console.log(authorization)
+    console.log('123')
+    console.log(authorization)
     if(!authorization){
-        return response.json({
-            status:false,
-            error:"não autorizado"})
+        return response.json({error:"não autorizado"})
         
     }
-     
-    
+        
     const token = authorization.split(' ')[1]
-    //  console.log(token)
+     console.log(token)
 
     try {
         const {id,permissions,roles}=jwt.verify(token, process.env.JWT_PASS ?? "") as jwtPayload//verifica o token
@@ -35,13 +31,13 @@ export const authMiddleware =async(request:Request,response: Response, next: Nex
             roles,
         }
         // console.log(request.user.id)
-        if(retornar){
-            return response.json({status:true})
+        
+        return{
+            
         }
-        next()//vai dizer que está tudo certo e vai prosseguir a função
         
     } catch (error) {
-        return response.json({status:false ,message: 'Failed to authenticate token.',error})
+        return response.status(500).json({ message: 'Failed to authenticate token.' })
     }
         
 }

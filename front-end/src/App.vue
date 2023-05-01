@@ -1,8 +1,10 @@
 <template>
-  <!-- <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav> -->
+  <nav>
+    <router-link to="/">index</router-link> |
+    <router-link to="/login">login</router-link>|
+    <router-link to="/cadastro">cadastrar</router-link>|
+    <router-link to="/perfil">perfil</router-link>|
+  </nav>
   <router-view/>
 </template>
 

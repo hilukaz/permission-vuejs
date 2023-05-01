@@ -50,7 +50,7 @@ export class UserController{
         }
             
     }    
-
+    
     async atualizar(request:Request, response:Response){
         const{id}=request.params
         const{name,password, email, company}=request.body;
